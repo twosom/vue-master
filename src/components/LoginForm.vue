@@ -52,7 +52,8 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'setUsername'
+      'setUsername',
+      'setToken'
     ]),
     async submitForm() {
       try {
@@ -62,12 +63,13 @@ export default {
           password: this.password
         }
         const {data} = await loginUser(userData);
-        // TODO 메인 페이지로 이동
+        const {token} = data;
         const username = data.user.username;
-        console.log(username);
+
         this.setUsername(username);
+        this.setToken(token);
+
         this.$router.push('/main');
-        // this.logMessage = `${data.user.username} 님 환영합니다.`;
 
       } catch (error) {
         // 에러 핸들링
