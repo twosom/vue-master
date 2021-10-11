@@ -15,13 +15,14 @@
       <input type="text" id="nickname" v-model="nickname">
     </div>
 
-    <button type="submit">회원 가입</button>
+    <button :disabled="!isValidUsername || !this.password || !this.nickname" type="submit">회원 가입</button>
     <p>{{ logMessage }}</p>
   </form>
 </template>
 
 <script>
 import {registerUser} from "@/api";
+import {validateEmail} from "@/utils/validation";
 
 export default {
   data() {
@@ -33,7 +34,11 @@ export default {
 
       // Log
       logMessage: String(),
-
+    }
+  },
+  computed: {
+    isValidUsername() {
+      return validateEmail(this.username);
     }
   },
   methods: {
