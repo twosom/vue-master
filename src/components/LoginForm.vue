@@ -32,6 +32,8 @@
 
 import {loginUser} from "@/api";
 import {validateEmail} from "@/utils/validation";
+import {mapMutations} from "vuex";
+
 
 export default {
   data() {
@@ -49,6 +51,9 @@ export default {
     }
   },
   methods: {
+    ...mapMutations([
+      'setUsername'
+    ]),
     async submitForm() {
       try {
         // 비즈니스 로직
@@ -57,7 +62,12 @@ export default {
           password: this.password
         }
         const {data} = await loginUser(userData);
-        this.logMessage = `${data.user.username} 님 환영합니다.`;
+        // TODO 메인 페이지로 이동
+        const username = data.user.username;
+        console.log(username);
+        this.setUsername(username);
+        this.$router.push('/main');
+        // this.logMessage = `${data.user.username} 님 환영합니다.`;
 
       } catch (error) {
         // 에러 핸들링

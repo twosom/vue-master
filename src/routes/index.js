@@ -16,11 +16,15 @@ export default new VueRouter({
         },
         {
             path: '/signup',
-            component: () => import('@/views/SignupPage')
+            component: () => import('@/views/SignupPage'),
+        },
+        {
+            path: '/main',
+            component: () => import('@/views/MainPage'),
         },
         {
             path: '*',
-            component: () => import('@/views/NotFoundPage')
+            component: () => import('@/views/NotFoundPage'),
         },
     ],
 });

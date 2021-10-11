@@ -6,15 +6,30 @@
       </router-link>
     </div>
     <div class="navigations">
-      <router-link to="/login">로그인</router-link>
-      |
-      <router-link to="/signup">회원가입</router-link>
+      <!-- 1 -->
+      <template v-if="this.isLogin">
+        <span>{{ this.getUsername }}</span>
+      </template>
+      <!-- 2 -->
+      <template v-else>
+        <router-link to="/login">로그인</router-link>
+        <router-link to="/signup">회원가입</router-link>
+      </template>
     </div>
   </header>
 </template>
 
 <script>
-export default {}
+import {mapGetters} from "vuex";
+
+export default {
+  computed: {
+    ...mapGetters([
+      'isLogin',
+      'getUsername'
+    ])
+  }
+}
 </script>
 
 <style scoped>
