@@ -8,7 +8,8 @@
     <div class="navigations">
       <!-- 1 -->
       <template v-if="this.isLogin">
-        <span>{{ this.getUsername }}</span>
+        <span class="username">{{ this.getUsername }}</span>
+        <a href="javascript:" @click="logoutUser">Logout</a>
       </template>
       <!-- 2 -->
       <template v-else>
@@ -20,7 +21,7 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import {mapGetters, mapMutations} from "vuex";
 
 export default {
   computed: {
@@ -28,11 +29,24 @@ export default {
       'isLogin',
       'getUsername'
     ])
+  },
+  methods: {
+    ...mapMutations([
+      'clearUsername'
+    ]),
+    logoutUser() {
+      this.clearUsername();
+      this.$router.push('/login');
+    }
   }
 }
 </script>
 
 <style scoped>
+.username {
+  color: white;
+}
+
 header {
   display: flex;
   justify-content: space-between;
