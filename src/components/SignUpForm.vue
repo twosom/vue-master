@@ -1,23 +1,31 @@
 <template>
-  <form @submit.prevent="submitForm">
-    <div>
-      <label for="username">id:</label>
-      <input type="text" id="username" v-model="username">
-    </div>
+  <div class="contents">
+    <div class="form-wrapper form-wrapper-sm">
+      <form @submit.prevent="submitForm" class="form">
+        <div>
+          <label for="username">id:</label>
+          <input type="text" id="username" v-model="username">
+        </div>
 
-    <div>
-      <label for="password">password:</label>
-      <input type="text" id="password" v-model="password">
-    </div>
+        <div>
+          <label for="password">password:</label>
+          <input type="text" id="password" v-model="password">
+        </div>
 
-    <div>
-      <label for="nickname">nickname:</label>
-      <input type="text" id="nickname" v-model="nickname">
-    </div>
+        <div>
+          <label for="nickname">nickname:</label>
+          <input type="text" id="nickname" v-model="nickname">
+        </div>
 
-    <button :disabled="!isValidUsername || !this.password || !this.nickname" type="submit">회원 가입</button>
-    <p>{{ logMessage }}</p>
-  </form>
+        <button
+            :disabled="!isValidUsername || !this.password || !this.nickname" type="submit"
+            class="btn"
+        >회원 가입</button>
+        <p class="log">{{ logMessage }}</p>
+      </form>
+    </div>
+  </div>
+
 </template>
 
 <script>
@@ -63,5 +71,7 @@ export default {
 </script>
 
 <style scoped>
-
+.btn {
+  color: white;
+}
 </style>
