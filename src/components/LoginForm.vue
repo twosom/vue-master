@@ -9,7 +9,7 @@
       <label for="password">pw:</label>
       <input type="text" id="password" v-model="password">
     </div>
-    <button type="submit">로그인</button>
+    <button :disabled="!isUsernameValid || !password" type="submit">로그인</button>
     <p>{{ logMessage }}</p>
   </form>
 </template>
@@ -17,6 +17,7 @@
 <script>
 
 import {loginUser} from "@/api";
+import {validateEmail} from "@/utils/validation";
 
 export default {
   data() {
@@ -26,6 +27,11 @@ export default {
       password: String(),
       // Log
       logMessage: String()
+    }
+  },
+  computed: {
+    isUsernameValid() {
+      return validateEmail(this.username);
     }
   },
   methods: {
@@ -45,8 +51,6 @@ export default {
       } finally {
         this.initForm();
       }
-
-
     },
     initForm() {
       this.username = '';
