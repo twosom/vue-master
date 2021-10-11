@@ -30,13 +30,23 @@ export default {
   },
   methods: {
     async submitForm() {
-      const userData = {
-        username: this.username,
-        password: this.password
+      try {
+        // 비즈니스 로직
+        const userData = {
+          username: this.username,
+          password: this.password
+        }
+        const {data} = await loginUser(userData);
+        this.logMessage = `${data.user.username} 님 환영합니다.`;
+
+      } catch (error) {
+        // 에러 핸들링
+        this.logMessage = error.response.data;
+      } finally {
+        this.initForm();
       }
-      const {data} = await loginUser(userData);
-      this.logMessage = `${data.user.username} 님 환영합니다.`;
-      this.initForm();
+
+
     },
     initForm() {
       this.username = '';
